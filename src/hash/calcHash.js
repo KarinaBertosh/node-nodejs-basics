@@ -1,6 +1,5 @@
 const calculateHash = async () => {
   const crypto = require("crypto");
-  const fs = require("fs");
   const str = "I need to be hashed 😃!";
 
   const hashNode = (val) =>

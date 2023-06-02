@@ -1,11 +1,11 @@
 import http from "http";
 import path from "path";
+import fs from "fs";
 import { release, version } from "os";
-import { createRequire } from "module";
 
-const require = createRequire(import.meta.url);
 const file = "./modules/cjsToEsm.mjs;";
 const folder = "./modules;";
+const files = "./src/modules/files";
 const random = Math.random();
 let unknownObject;
 
@@ -16,12 +16,12 @@ console.log(`Path to current file is ${path.resolve(file)}`);
 console.log(`Path to current directory is ${path.resolve(folder)}`);
 
 if (random > 0.5) {
-  unknownObject = await import("./files/a.json", { assert: { type: "json" } });
+  unknownObject = fs.readFileSync(`${files}\\a.json`);
 } else {
-  unknownObject = await import("./files/b.json", { assert: { type: "json" } });
+  unknownObject = fs.readFileSync(`${files}\\b.json`);
 }
 
-console.log(unknownObject.default);
+console.log(JSON.parse(unknownObject));
 const PORT = 3000;
 
 const myServer = http
