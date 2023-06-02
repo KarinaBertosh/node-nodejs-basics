@@ -1,6 +1,7 @@
 const calculateHash = async () => {
   const crypto = require("crypto");
-  const str = "I need to be hashed 😃!";
+  const fs = require("fs");
+  const text = fs.readFileSync("./src/hash/files/fileToCalculateHashFor.txt");
 
   const hashNode = (val) =>
     new Promise((resolve) =>
@@ -10,7 +11,7 @@ const calculateHash = async () => {
       )
     );
 
-  hashNode(str).then(console.log);
+  hashNode(text).then(console.log);
 };
 
 calculateHash();
