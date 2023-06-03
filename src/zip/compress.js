@@ -6,7 +6,7 @@ const compress = () => {
     const handleStream = createReadStream(path);
     handleStream
       .pipe(createGzip())
-      .pipe(createWriteStream(`archive.gz`))
+      .pipe(createWriteStream("archive.gz"))
       .on("finish", () => {
         console.log("Compression completed successfully");
       });
