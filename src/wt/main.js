@@ -6,7 +6,7 @@ const performCalculations = () => {
 
   const runService = () => {
     return new Promise((resolve, reject) => {
-      const worker = new Worker("./src/wt/main.js", {});
+      const worker = new Worker("./src/wt/worker.js", {});
       worker.on("message", resolve);
       worker.on("error", reject);
       worker.on("exit", (code) => {
