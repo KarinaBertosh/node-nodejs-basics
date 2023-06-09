@@ -2,12 +2,17 @@ const performCalculations = () => {
   const os = require("os");
   const cpuData = os.cpus().length;
   const { Worker } = require("worker_threads");
-  console.log("Start Program");
 
   const runService = () => {
     return new Promise((resolve, reject) => {
-      const worker = new Worker("./src/wt/worker.js", {});
-      worker.on("message", resolve);
+      const worker = new Worker("./src/wt/worker.js", {
+        workerData: {
+          value: 14,
+        },
+      });
+      worker.on("message", (result) => {
+        console.log(result);
+      });
       worker.on("error", reject);
       worker.on("exit", (code) => {
         if (code != 0) {
@@ -19,14 +24,11 @@ const performCalculations = () => {
 
   const run = async () => {
     const result = await runService();
-    console.log(result);
   };
 
   for (let i = 0; i < cpuData; i++) {
     run().catch((error) => console.log(error));
   }
-
-  setTimeout(() => console.log("End Program"), 2000);
 };
 
 performCalculations();

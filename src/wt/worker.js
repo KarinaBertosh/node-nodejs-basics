@@ -12,8 +12,9 @@ const sendResult = () => {
     console.log(result);
     return result;
   } else {
-    console.log("Inside Worker!");
-    console.log(isMainThread);
+    parentPort.postMessage(
+      nthFibonacci(workerData.value)
+    );
   }
 };
 
