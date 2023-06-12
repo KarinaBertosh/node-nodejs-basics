@@ -3,6 +3,7 @@ const performCalculations = () => {
   const os = require("os");
   const cpuData = os.cpus().length;
   const arr = [];
+  let error = "";
 
   const getValue = (i) => {
     const result = 10 + i;
@@ -10,15 +11,16 @@ const performCalculations = () => {
   };
 
   const runService = (i) => {
-    return new Promise((resolve, reject) => {
+    const result = new Promise((resolve, reject) => {
       const worker = new Worker("./src/wt/worker.js", {
         workerData: {
           value: getValue(i),
         },
       });
       worker.on("message", (result) => {
-        arr.push(result);
+        arr.push({ status: error ? "error" : "resolved", data: result });
       });
+      worker.on("messageerror", reject);
       worker.on("error", reject);
       worker.on("exit", (code) => {
         if (code != 0) {
@@ -27,6 +29,7 @@ const performCalculations = () => {
         console.log(arr);
       });
     });
+    return result;
   };
 
   const run = async (i) => {
@@ -36,10 +39,6 @@ const performCalculations = () => {
   for (let i = 0; i < cpuData; i++) {
     run(i).catch((error) => console.log(error));
   }
-
-  // console.log(arr);
-
-  // setTimeout(() => console.log(arr), 2000);
 };
 
 performCalculations();
