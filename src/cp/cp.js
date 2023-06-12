@@ -1,6 +1,11 @@
-const spawnChildProcess = async (args) => {
-    // Write your code here
+const spawnChildProcess = (args) => {
+  const { fork } = require("child_process");
+  console.log("Running script.js");
+  console.log("Forking a new subprocess....");
+  const child = fork("./src/cp/files/script.js", args);
+  child.on("close", function (code) {
+    console.log("child process exited with code " + code);
+  });
 };
 
-// Put your arguments in function call to test this functionality
-spawnChildProcess( /* [someArgument1, someArgument2, ...] */);
+spawnChildProcess(["1", "2", "3"]);
