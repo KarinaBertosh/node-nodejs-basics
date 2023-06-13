@@ -1,14 +1,15 @@
 const rename = () => {
   const fs = require("fs");
-  const file = "./fs/files/wrongFilename.txt";
-  const newFile = "./fs/files/properFilename.md";
+  const file = "./src/fs/files/wrongFilename.txt";
+  const newFile = "./src/fs/files/properFilename.md";
 
   if (fs.existsSync(file) && !fs.existsSync(newFile)) {
     fs.rename(file, newFile, () => {
       console.log("File Renamed!");
     });
   } else {
-    return console.log(`Error: FS operation failed`);
+    const err = new Error('FS operation failed')
+    return console.log(err.message);
   }
 };
 
