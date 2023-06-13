@@ -1,9 +1,10 @@
 const performCalculations = () => {
-  const { Worker } = require("worker_threads");
+  const { Worker, MessageChannel } = require("worker_threads");
+  const assert = require("assert");
   const os = require("os");
   const cpuData = os.cpus().length;
-  const arr = [];
-  let error = "";
+
+  let arr = [];
 
   const getValue = (i) => {
     const result = 10 + i;
@@ -11,25 +12,27 @@ const performCalculations = () => {
   };
 
   const runService = (i) => {
-    const result = new Promise((resolve, reject) => {
-      const worker = new Worker("./src/wt/worker.js", {
-        workerData: {
-          value: getValue(i),
-        },
-      });
-      worker.on("message", (result) => {
-        arr.push({ status: error ? "error" : "resolved", data: result });
-      });
-      worker.on("messageerror", reject);
-      worker.on("error", reject);
-      worker.on("exit", (code) => {
-        if (code != 0) {
-          reject(new Error("Worker has stopped"));
-        }
-        console.log(arr);
-      });
+    const worker = new Worker("./src/wt/worker.js", {
+      workerData: {
+        value: getValue(i),
+      },
     });
-    return result;
+    const subChannel = new MessageChannel();
+    worker.postMessage({ hereIsYourPort: subChannel.port1 }, [
+      subChannel.port1,
+    ]);
+    subChannel.port2.on("message", (value) => {
+      arr.push({ status: "resolved", data: value });
+    });
+    worker.on("error", (result) => {
+      arr.push({ status: "error", data: null });
+    });
+    worker.on("exit", (code) => {
+      if (code != 0) {
+        new Error("Worker has stopped");
+      }
+      console.log(arr);
+    });
   };
 
   const run = async (i) => {
