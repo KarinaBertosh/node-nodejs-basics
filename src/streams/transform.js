@@ -1,17 +1,14 @@
-const readline = require("readline");
+const process = require("process");
+const { Transform } = require("stream");
 
 const transform = () => {
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-    terminal: false,
+  const uppercase = new Transform({
+    transform(chunk, encoding, callback) {
+      callback(null, chunk.toString().split("").reverse().join(""));
+    },
   });
 
-  rl.on("line", (line) => {
-    const result = line.split("").reverse().join("");
-    console.log(result);
-  });
-  rl.once("close", () => {});
+  process.stdin.pipe(uppercase).pipe(process.stdout);
 };
 
 transform();
