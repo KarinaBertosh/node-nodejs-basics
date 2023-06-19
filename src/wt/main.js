@@ -31,7 +31,7 @@ const performCalculations = () => {
       if (code != 0) {
         new Error("Worker has stopped");
       }
-      console.log(arr);
+      if (arr.length === cpuData) console.log(arr);
     });
   };
 
