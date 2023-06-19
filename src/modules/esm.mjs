@@ -3,8 +3,8 @@ import path from "path";
 import fs from "fs";
 import { release, version } from "os";
 
-const file = "./modules/cjsToEsm.mjs;";
-const folder = "./modules;";
+const file = "./modules/esm.mjs";
+const folder = "./modules";
 const files = "./src/modules/files";
 const random = Math.random();
 let unknownObject;
