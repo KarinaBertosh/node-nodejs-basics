@@ -1,7 +1,8 @@
+const fs = require("fs");
+var stream = require("stream");
+var util = require("util");
+
 const write = () => {
-  const fs = require("fs");
-  var stream = require("stream");
-  var util = require("util");
   const file = "./src/streams/files/fileToWrite.txt";
 
   function EchoStream() {

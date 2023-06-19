@@ -1,5 +1,6 @@
+const fs = require("fs");
+
 const rename = () => {
-  const fs = require("fs");
   const file = "./src/fs/files/wrongFilename.txt";
   const newFile = "./src/fs/files/properFilename.md";
 

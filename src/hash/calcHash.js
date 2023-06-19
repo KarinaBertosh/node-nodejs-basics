@@ -1,6 +1,7 @@
+const crypto = require("crypto");
+const fs = require("fs");
+
 const calculateHash = async () => {
-  const crypto = require("crypto");
-  const fs = require("fs");
   const text = fs.readFileSync("./src/hash/files/fileToCalculateHashFor.txt");
 
   const hashNode = (val) =>

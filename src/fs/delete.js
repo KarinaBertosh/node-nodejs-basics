@@ -1,5 +1,6 @@
+const fs = require("fs");
+
 const remove = () => {
-  const fs = require("fs");
   const file = "./src/fs/files/fileToRemove.txt";
 
   if (fs.existsSync(file)) {
@@ -7,7 +8,7 @@ const remove = () => {
       console.log("File delete");
     });
   } else {
-    const err = new Error('FS operation failed')
+    const err = new Error("FS operation failed");
     return console.log(err.message);
   }
 };

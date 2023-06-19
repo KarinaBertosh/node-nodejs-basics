@@ -1,9 +1,9 @@
-const performCalculations = () => {
-  const { Worker, MessageChannel } = require("worker_threads");
-  const assert = require("assert");
-  const os = require("os");
-  const cpuData = os.cpus().length;
+const { Worker, MessageChannel } = require("worker_threads");
+const assert = require("assert");
+const os = require("os");
 
+const performCalculations = () => {
+  const cpuData = os.cpus().length;
   let arr = [];
 
   const getValue = (i) => {

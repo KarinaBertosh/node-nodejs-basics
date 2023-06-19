@@ -1,5 +1,6 @@
+const fs = require("fs");
+
 const read = () => {
-  const fs = require("fs");
   const file = "./src/fs/files/fileToRead.txt";
   if (fs.existsSync(file)) {
     const file = fs.createReadStream("./src/fs/files/fileToRead.txt", "utf-8");

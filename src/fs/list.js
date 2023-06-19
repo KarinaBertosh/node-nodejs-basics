@@ -1,5 +1,6 @@
+const fs = require("fs");
+
 const list = () => {
-  const fs = require("fs");
   const files = "./src/fs/files";
 
   if (fs.existsSync(files)) {
@@ -7,7 +8,7 @@ const list = () => {
       console.log(file);
     });
   } else {
-    const err = new Error('FS operation failed')
+    const err = new Error("FS operation failed");
     return console.log(err.message);
   }
 };

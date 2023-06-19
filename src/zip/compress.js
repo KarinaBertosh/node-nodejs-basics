@@ -1,7 +1,7 @@
-const compress = () => {
-  const { createReadStream, createWriteStream } = require("fs");
-  const { createGzip } = require("zlib");
+const { createReadStream, createWriteStream } = require("fs");
+const { createGzip } = require("zlib");
 
+const compress = () => {
   const compressFile = (path) => {
     const handleStream = createReadStream(path);
     handleStream
