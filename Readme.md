@@ -1,9 +1,31 @@
 # Node.js basics
+
 The challenge is to complete a few simple tasks to learn the basics of Node.js.
+
+## Running scripts
+To check how the task is implemented, run the following scripts
+- npm run cli:args
+- npm run cli:env
+- npm run cp
+- npm run fs:copy
+- npm run fs:create
+- npm run fs:delete
+- npm run fs:list
+- npm run fs:read
+- npm run fs:rename
+- npm run hash
+- npm run modules
+- npm run streams:read
+- npm run streams:transform
+- npm run streams:write
+- npm run wt
+- npm run zip:compress
+- npm run zip:decompress
 
 ## Subtasks
 
 ### File system (src/fs)
+
 You should implement several functions in dedicated files
 
 - create.js - implement function that creates new file fresh.txt with content I am fresh and young inside of the files folder (if file already exists Error with message FS operation failed must be thrown)
@@ -14,29 +36,30 @@ You should implement several functions in dedicated files
 - read.js - implement function that prints content of the fileToRead.txt into console (if there's no file fileToRead.txt Error with message FS operation failed must be thrown)
 
 ### Command line interface(src/cli)
+
 You should implement several functions in dedicated files
 
-- env.js - implement function that parses environment variables with prefix RSS_ and prints them to the console in the format RSS_name1=value1; RSS_name2=value2
+- env.js - implement function that parses environment variables with prefix RSS\_ and prints them to the console in the format RSS_name1=value1; RSS_name2=value2
 - args.js - implement function that parses command line arguments (given in format --propName value --prop2Name value2, you don't need to validate it) and prints them to the console in the format propName is value, prop2Name is value2
 
-
 ### Modules(src/modules)
+
 You should implement several functions in dedicated files
 
-
 ### File system (src/fs)
+
 You should refactor file (you can add additional imports if needed)
 
 - cjsToEsm.cjs - rewrite it to it's equivalent in ECMAScript notation (and rename it to esm.mjs)
 
-
 ### Hash (src/hash)
+
 You should implement several functions in dedicated files
 
 - calcHash.js - implement function that calculates SHA256 hash for file fileToCalculateHashFor.txt and logs it into console as hex using Streams API
 
-
 ### Streams (src/streams)
+
 You should implement several functions in dedicated files
 
 - read.js - implement function that reads file fileToRead.txt content using Readable Stream and prints it's content into process.stdout
@@ -44,12 +67,14 @@ You should implement several functions in dedicated files
 - transform.js - implement function that reads data from process.stdin, reverses text using Transform Stream and then writes it into process.stdout
 
 ### Zlib (src/zip)
+
 You should implement several functions in dedicated files
 
 - compress.js - implement function that compresses file fileToCompress.txt to archive.gz using zlib and Streams API
 - decompress.js - implement function that decompresses archive.gz back to the fileToCompress.txt with same content as before compression using zlib and Streams API
 
 ### Worker Threads (src/wt)
+
 You should implement several functions in dedicated files
 
 - worker.js - extend given function to work with data received from main thread and implement function which sends result of the computation to the main thread
@@ -60,9 +85,9 @@ You should implement several functions in dedicated files
 The results in the array must be in the same order that the workers were created
 
 ### Child Processes (src/cp)
+
 You should implement several functions in dedicated files
 
 - cp.js - implement function spawnChildProcess that receives array of arguments args and creates child process from file script.js, passing these args to it. This function should create IPC-channel between stdin and stdout of master process and child process:
 - child process stdin should receive input from master process stdin
 - child process stdout should send data to master process stdout
-
