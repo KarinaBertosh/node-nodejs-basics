@@ -1,10 +1,18 @@
 const parseArgs = () => {
-  const arguments = process.argv;
-  console.log(
-    `${arguments[2].slice(2)} is ${arguments[3]},`,
-    `${arguments[4].slice(2)} is ${arguments[5]},`,
-    `${arguments[6].slice(2)} is ${arguments[7]}`
-  );
+  const args = process.argv.slice(2);
+  const result = [];
+  const separator = ', ';
+  let i = 0;
+
+  while (i < args.length) {
+    const addArgInArr = () => {
+      result.push(`${args[i].replace(/^--/, "")} is ${args[i + 1]}`);
+      i += 2;
+    };
+    args[i].startsWith("--") ? addArgInArr() : i += 1;
+  }
+
+  console.log(result.join(separator));
 };
 
 parseArgs();
